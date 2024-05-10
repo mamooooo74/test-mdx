@@ -1,5 +1,7 @@
 import remarkGfm from 'remark-gfm';
+import rehypePrettyCode from 'rehype-pretty-code';
 import mdx from "@next/mdx"
+import { getHighlighter } from 'shiki';
 
 
 /** @type {import('next').NextConfig} */
@@ -13,7 +15,11 @@ const withMDX = mdx({
     // remarkとrehypeは指定しなくてよいとドキュメントに指定あり。
     // remarkParse,remarkRehype,rehypeStringifyは指定しなくても大丈夫。
     remarkPlugins: [remarkGfm],
-    rehypePlugins: [],
+    rehypePlugins: [[rehypePrettyCode,({
+      theme: "github-dark",
+      defaultColor: false,
+      getHighlighter: getHighlighter,
+    })]],
   },
 });
 
